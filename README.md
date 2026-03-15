@@ -1,6 +1,6 @@
 # TRAIN — 3× Indoor Programme
 
-A personal fitness web app for a structured 3-times-per-week indoor training programme. Built as a single HTML file, hosted on GitHub Pages — no server, no dependencies, works offline.
+A personal fitness web app for a structured 3-times-per-week indoor training programme. Built as a single HTML file, hosted on GitHub Pages with Supabase for cross-device sync.
 
 **Live app → [sapere.github.io/fitness-program-app](https://sapere.github.io/fitness-program-app)**
 
@@ -15,27 +15,41 @@ The structure is based on well-evidenced training principles:
 - **Rep range 8–15** — effective for hypertrophy and joint-friendly for the 45–55 age group
 - **Deload every 6 weeks** — reduces accumulated fatigue, restores hormonal balance, protects joints and CNS. You lose no muscle during a properly structured deload
 
-**Current activity baseline:** 1 hour of basketball per week + occasional 5 km walks. The programme builds from this base.
+**Protein target:** 1.6–2.0 g/kg bodyweight per day — the single most important nutritional lever for body recomposition.
 
-**Protein target:** 135–168 g/day (1.6–2.0 g/kg bodyweight) — the single most important nutritional lever for body recomposition.
+---
+
+## Multi-user support
+
+Each person gets their own synced data by adding `?user=yourname` to the URL:
+
+```
+https://sapere.github.io/fitness-program-app?user=sand
+https://sapere.github.io/fitness-program-app?user=jane
+```
+
+- Progress, session history and weight logs are completely separate per user
+- Data syncs across all devices in real time via Supabase
+- If offline, data is saved locally and syncs when connection is restored
+- Bookmark your personal URL to skip the name prompt
 
 ---
 
 ## How to use the app
 
-### 1. Select your current week (top of the page)
+### 1. Select your current week
 
 Eight week buttons represent one full training cycle. Weeks 1–6 are the build phase; weeks 7–8 are the deload. Each week shows:
 
-- How many sets and reps to do
-- Your target RPE (Rate of Perceived Exertion, 1–10 scale)
-- How long to rest between sets
+- Sets and reps to perform
+- Target RPE (Rate of Perceived Exertion, 1–10 scale)
+- Rest time between sets
 - The cardio finisher protocol
-- A load/volume intensity bar so you can see the progression at a glance
+- A load/volume intensity bar showing progression at a glance
 
-### 2. Select your session for today (A, B, or C)
+### 2. Select your session (A, B, or C)
 
-Rotate through sessions A → B → C across your three weekly training days. There is no fixed day — just do them in order with at least one rest day between sessions. A typical week might be:
+Rotate through sessions A → B → C across your three weekly training days. No fixed days — just do them in order with at least one rest day between. The app remembers your last session and shows a green dot on the next one to do.
 
 | Day | Session |
 |-----|---------|
@@ -47,25 +61,25 @@ Rotate through sessions A → B → C across your three weekly training days. Th
 
 Each session has three phases:
 
-**Warm-up (5 min)** — dynamic movements to prepare the joints and muscles. Do not skip this.
+**Warm-up (5 min)** — dynamic movements to prepare joints and muscles. Do not skip.
 
-**Resistance training (~28 min)** — 4 exercises with sets, reps and RPE shown for the selected week. For each exercise:
-- Tap the circles to tick off completed sets
-- Tap **Rest Xs** after finishing a set to start the countdown timer
-- The card highlights when all sets are done
-- Tap **Watch demo on YouTube** for a form tutorial if you're unsure of the movement
+**Resistance training (~28 min)** — 4 exercises per session. For each exercise:
+- Tap circles to tick off completed sets (card turns green when all sets done)
+- Tap **Rest Xs** after a set to start the countdown timer with audio beeps
+- Log your weight and reps — the app tracks personal bests (🏆 PB badge)
+- Tap **Watch demo on YouTube** for a form tutorial
 
-**Cardio finisher (7 min)** — interval-based cardio at the end of the session. The work/rest ratio gets harder each week.
+**Cardio finisher (7 min)** — tap **Start finisher timer** to auto-count rounds. The timer alternates between WORK (green) and REST (blue) phases with audio cues. Work/rest ratio gets harder each week.
 
 ### 4. Mark the session complete
 
-At the bottom of the page, tap **Mark session complete** when you finish. This saves the session to your browser's local storage and adds it to your progress log.
+Tap **Mark session complete** at the bottom. This syncs to Supabase and updates your progress across all devices. You get confetti. 🎉
 
 ### 5. Track progress
 
-Tap **Progress** in the top-right to see:
+Tap **Progress** in the top-right:
 - Total sessions completed
-- Current day streak
+- Current training day streak (🔥 shown in header)
 - Full session history with dates
 
 ---
@@ -74,7 +88,7 @@ Tap **Progress** in the top-right to see:
 
 ### Session A — Lower body + Push
 
-Focuses on the front of the lower body (quads, glutes) combined with pushing movements for the upper body (chest, shoulders, triceps).
+Front of lower body (quads, glutes) combined with upper body pushing movements.
 
 | Exercise | Primary muscles |
 |----------|----------------|
@@ -83,13 +97,13 @@ Focuses on the front of the lower body (quads, glutes) combined with pushing mov
 | Bent-over row | Lats, mid-back, biceps |
 | Plank + shoulder taps | Core anti-rotation, shoulder stability |
 
-> The row is included here to balance the push movement and keep shoulder health in check.
+> The row is included to balance the push and keep shoulder health in check.
 
 ---
 
 ### Session B — Hinge + Pull
 
-Focuses on the posterior chain (hamstrings, glutes, lower back) combined with pulling movements. This is the most demanding session on the back and legs.
+Posterior chain (hamstrings, glutes, lower back) combined with pulling movements. Most demanding on the back and legs.
 
 | Exercise | Primary muscles |
 |----------|----------------|
@@ -98,13 +112,13 @@ Focuses on the posterior chain (hamstrings, glutes, lower back) combined with pu
 | Lat pulldown / cable row | Lats, rhomboids, biceps |
 | Dead bug | Deep core, anti-extension |
 
-> Schedule basketball away from Session B — your hamstrings and lower back will need recovery time.
+> Schedule basketball away from Session B — hamstrings and lower back need recovery time.
 
 ---
 
-### Session C — Compound movements + Weak links
+### Session C — Compound+ (weak links)
 
-A varied session that hits different angles from A and B, and specifically targets rear delts and rotator cuff — the muscles most commonly neglected and most important for shoulder health and posture at 49.
+Different angles from A and B, with specific focus on rear delts and rotator cuff — the most commonly neglected muscles and most important for shoulder health and posture.
 
 | Exercise | Primary muscles |
 |----------|----------------|
@@ -113,7 +127,7 @@ A varied session that hits different angles from A and B, and specifically targe
 | Rear delt fly / face pull | Rear delts, external rotators, rhomboids |
 | Pallof press / side plank | Obliques, core anti-rotation |
 
-> The rear delt fly and Pallof press are the two exercises people are most tempted to skip. Don't — they directly prevent shoulder and lower back injuries.
+> The rear delt fly and Pallof press are the two people skip most. Don't — they prevent shoulder and lower back injuries.
 
 ---
 
@@ -130,40 +144,53 @@ A varied session that hits different angles from A and B, and specifically targe
 | 7 | Deload | 2 | 12–15 | 35% — 60–70% of week 6 load |
 | 8 | Deload | 2 | 12–15 | 30% — mobility and technique only |
 
-After week 8, start over at week 1 — but you should be able to use slightly heavier weights than the previous cycle.
+After week 8, restart at week 1 with slightly heavier weights than the previous cycle.
 
 ---
 
 ## Features
 
-- Rest timer with audio countdown and ring animation
+- Cross-device sync via Supabase (sessions + weight logs)
+- Offline fallback to localStorage when no connection
+- Multi-user support via `?user=name` URL parameter
+- Rest timer with audio countdown, ring animation, and beep on completion
+- Finisher interval timer — auto-counts rounds, alternates WORK/REST with audio
 - Per-set tick tracker on every exercise
+- Weight logging per exercise with personal best detection
+- Last session memory — always shows which session to do next
+- Day streak counter with 🔥 badge
+- Confetti on session completion
 - YouTube demo link for every exercise
-- Progress log saved to browser local storage
 - Print / PDF export (File → Print → Save as PDF)
-- Fully offline — no server, no account, no tracking
 - Mobile friendly
 
 ---
 
 ## Tech stack
 
-Single `index.html` file. No frameworks, no build step, no dependencies beyond two Google Fonts. Data stored in browser `localStorage`.
+Single `index.html` file. No frameworks, no build step. Google Fonts for typography, Supabase JS SDK (via CDN) for database sync. Falls back to `localStorage` when offline.
+
+**Backend:** Supabase (PostgreSQL) — two tables: `sessions` and `weights`, both with Row Level Security enabled.
 
 ---
 
 ## Updating the app
 
 ```bash
-# Make changes to index.html, then:
+cp ~/Downloads/index.html /path/to/fitness-program-app/
 cd /path/to/fitness-program-app
-cp ~/Downloads/index.html .
 git add index.html
 git commit -m "fix: describe what changed"
 git push
 ```
 
 GitHub Pages redeploys automatically within ~30 seconds.
+
+---
+
+## Security notes
+
+The Supabase anon key in the HTML source is intentional and safe — it is a public key by design. Data is protected by Row Level Security policies on the database. Without proper authentication (email/password login), data is scoped by username tag only — suitable for a private app shared between trusted people, not a public-facing product.
 
 ---
 
